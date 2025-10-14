@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show-Contact</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shandow-lg" style="max-width: 700px;margin:auto">
+             <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Contact Details</h4>
+             </div>
+             <div class="card-body">
+               <div class="mb-3">
+                 <strong>First Name:</strong><%=contact.first_name %>
+               </div>
+               <div class="mb-3">
+                 <strong>Last Name:</strong><%=contact.last_name %>
+               </div>
+               <div class="mb-3">
+                 <strong>Email:</strong><%=contact.email %>
+               </div>
+               <div class="mb-3">
+                 <strong>phone:</strong><%=contact.phone %>
+               </div>
+               <div class="mb-3">
+                 <strong>Address:</strong><%=contact.address %>
+               </div>
+               <div class="d-flex gap-2">
+                <a href="/update/<%=contact._id %>" class="btn btn-warning">Edit</a>
+                <a href="/delete/<%=contact._id %>" class="btn btn-danger">Delete</a>
+                <a href="/" class="btn btn-secondary">Cancel</a>
+               </div>
+             </div>
+        </div>
+    </div>
+</body>
+</html>
