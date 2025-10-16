@@ -2,11 +2,11 @@ const express=require("express")
 const app=new express()
 const mongoose=require("mongoose")
 const Contact=require("./models/curd")
+const connectdb = require("./config/db")
+const userRouter=require('./Routes/Router')
 //connection to mongodb
 //first step 
-mongoose.connect('mongodb://127.0.0.1:27017/Crud')
-.then(()=>console.log('Databse Connected Successfully'))
-
+connectdb()
 //middleware
 app.set('view engine','ejs')
 app.use(express.urlencoded({extended:false}))
@@ -14,40 +14,13 @@ app.use(express.urlencoded({extended:false}))
 //it use when post method use when you submit it conver ot into json format
 
 //Routing
-app.get('/',async(req,res)=>{
-    const contacts=await Contact.find()
-    // res.json(contacts)
-     res.render('home',{contacts})
-})
-app.get('/show/:id',async (req,res)=>{
-    const contact=await Contact.findOne({_id:req.params.id})
-    res.render('show-contact',{contact})
-})
-app.get('/add',(req,res)=>{
-    res.render('add-contact')
-})
-app.post('/add',async(req,res)=>{
-    await Contact.create(req.body)
-    res.redirect('/')
-})
- 
+app.use(userRouter)
 
-app.get('/update/:id',async (req,res)=>{
-  const contact =await Contact.findById(req.params.id)
-    res.render('update-contact',{contact})  
-})
-
-app.post('/update/:id',async (req,res)=>{
-    await Contact.findByIdAndUpdate(req.params.id,req.body)
-    res.redirect('/')
-})
-app.get('/delete/:id',async(req,res)=>{
-    await Contact.findByIdAndDelete(req.params.id)
-    res.redirect('/')
-})
-
-
-
-app.listen(3000,(req,res)=>{
+const PORT=process.env.PORT|3000
+app.listen(PORT,(req,res)=>{
     console.log("Server Connected successfully");
 })
+//spilting multiple compoments seprate using model view controller efficeent for changing and reuse
+//controllerr is a boss contain logic manage everything
+//url go to controller by routing and requset to model and process data send response dATA RAW =JSON THEN IT GO TO VIEW THEN IT WORK SEPRATE LIKE EVER  IN DIFFRENT FOLDER
+//logic data base
